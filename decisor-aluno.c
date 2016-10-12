@@ -163,6 +163,14 @@ No *buscaFilho (No *n, int atributo, int categoria, No **antecessor){
 
 int decide (No *arvore, int *atributos){
 	printf ("decide\n");
+	
+	//				ID		Sexo	Relacionamento	Renda	Região	Tipo	Transporte	Restaurante
+	// atributos = [1234, 	0, 		1, 				2, 		2,		1,		1, 			2]
+	//				[0]		[1]		[2]				[3]		[4]		[5]		[6]			[7]
+	
+	
+	
+	
 	return NULL;
 }
 
