@@ -2,13 +2,17 @@
 Docente:		Fábio Nakano
 Dicente:		Guilherme Bortoto de Moraes
 Número USP:		9360760
-
-
-
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include "decisor.h"
+
+/*
+	Mostrar "prints"?
+	prints = 1 --> ativado
+	prints = 0 --> desativado
+								*/
+	int prints = 1;
 
 // Ferramenta
 // Mostra na tela o conteúdo de um nó
@@ -40,16 +44,20 @@ No *criaArvore(void){
 // Dado um nó pai, cria um nó filho
 // Se já existir uma lista no nó pai, o nó filho é adicionado a essa lista.
 No *criaFilho (No *pai, int atributoDoPai, int categoriaDoFilho, int atributoOuDecisao){
-	printf ("criaFilho\n");
-	/*
+
+
 	// Prints para esclarecimento
-	printf("%d", atributoDoPai);
-	printf(", ");
-	printf("%d", categoriaDoFilho);
-	printf(", ");
-	printf("%d", atributoOuDecisao);
-	printf(")\n");
-	*/
+	if(prints){
+		printf ("criaFilho (");
+		printf("%d", atributoDoPai);
+		printf(", ");
+		printf("%d", categoriaDoFilho);
+		printf(", ");
+		printf("%d", atributoOuDecisao);
+		printf(")\n");
+	}else{
+		printf ("criaFilho\n");
+	}
 	No *filho = malloc(sizeof(No));
    
 	// Esse filho é uma opção da relação "atributoDoPai"
@@ -113,10 +121,13 @@ No *buscaFilho (No *n, int atributo, int categoria, No **antecessor){
 	while(atual->prox){
 		// Se categoria e atributoOuDecisão corresponderem aos valores buscados
 		if((atual->categoria == categoria)&&(atual->atributoOuDecisao == atributo)){
-			printf("\nNó encontrado!!\n");
+		
+			if(prints){
+				printf("\nNó encontrado!!\n");
+			}
 			
 			// Se o nó for o primeiro da fila, avisar que o nó anterior é o nó pai
-			if(anterior == n){
+			if((anterior == n)&&(prints)){
 				printf("Nota: o nó encontrado era o primeiro da lista\n");
 				printf("O nó pai foi considerado como o nó antecessor\n");
 			}
@@ -131,7 +142,9 @@ No *buscaFilho (No *n, int atributo, int categoria, No **antecessor){
 	
 	// Realizar comparação para o último elemento
 	if((atual->categoria == categoria)&&(atual->atributoOuDecisao == atributo)){
-		printf("\nNó encontrado!!\n");
+		if(prints){
+			printf("\nNó encontrado!!\n");
+		}
 		*antecessor = anterior;
 		return atual;
 	}	
@@ -152,19 +165,19 @@ int decide (No *arvore, int *atributos){
 	// atributos = [1234, 	0, 		1, 				2, 		2,		1,		1, 			2]
 	// posição   - [0]		[1]		[2]				[3]		[4]		[5]		[6]			[7]
 
-	/*
-	// Mostra uma tabela de atributos
-	printf("\n\n\n*****\n");
-	printf("ID:\t\t%d\n", atributos[0]);
-	printf("Sexo\t\t%d\n", atributos[1]);
-	printf("Relacionamento\t%d\n", atributos[2]);
-	printf("Renda\t\t%d\n", atributos[3]);
-	printf("Região\t\t%d\n", atributos[4]);
-	printf("Tipo\t\t%d\n", atributos[5]);
-	printf("Transporte\t%d\n", atributos[6]);
-	printf("Restaurante\t%d\n", atributos[7]);
-	printf("\n\n\n");
-	*/
+	if(prints){
+		// Mostra uma tabela de atributos
+		printf("\n*****\n");
+		printf("ID:\t\t%d\n", atributos[0]);
+		printf("Sexo\t\t%d\n", atributos[1]);
+		printf("Relacionamento\t%d\n", atributos[2]);
+		printf("Renda\t\t%d\n", atributos[3]);
+		printf("Região\t\t%d\n", atributos[4]);
+		printf("Tipo\t\t%d\n", atributos[5]);
+		printf("Transporte\t%d\n", atributos[6]);
+		printf("Restaurante\t%d\n", atributos[7]);
+		printf("\n");
+	}
 	
 	No *tmp;
 	// Enquanto o nó atual não for uma folha
@@ -182,7 +195,9 @@ int decide (No *arvore, int *atributos){
 		}
 	}
 	// se não existir na lista, o valor é inválido
-	printf("Valor inválido\n");
+	if(prints){
+		printf("Valor inválido\n");
+	}
 	return -1;
 }
 
